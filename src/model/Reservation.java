@@ -3,8 +3,8 @@ package model;
 import java.util.Date;
 
 public class Reservation {
-    private Customer customer;
-    private IRoom room;
+    Customer customer;
+    IRoom room;
     private Date checkInDate;
     private Date checkOutDate;
 
@@ -33,7 +33,6 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Customer: " + customer.getFirstName() + " " + customer.getLastName() +
-                " Room: " + room.getRoomNumber() + " Check In: " + getCheckInDate() + " Check Out: " + getCheckOutDate();
+        return customer.toString() + room.toString() + " CheckIn: " + checkInDate + " CheckOut: " + checkOutDate;
     }
 }

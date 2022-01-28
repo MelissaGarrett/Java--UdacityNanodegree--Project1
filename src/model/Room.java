@@ -15,12 +15,24 @@ public class Room implements IRoom {
         return roomNumber;
     }
 
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
     public Double getRoomPrice() {
         return price;
     }
 
+    public void setRoomPrice(Double price) {
+        this.price = price;
+    }
+
     public RoomType getRoomType() {
         return enumeration;
+    }
+
+    public void setRoomType(RoomType enumeration) {
+        this.enumeration = enumeration;
     }
 
     public boolean isFree() {
