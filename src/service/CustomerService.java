@@ -13,19 +13,20 @@ public class CustomerService {
 
     public static CustomerService getInstance() { return customerService; }
 
-    Customer customer;
-    Map<String, Customer> customers = new HashMap<String, Customer>();
+    Map<String, Customer> allCustomers = new HashMap<String, Customer>();
 
     public void addCustomer(String email, String firstName, String lastName) {
-        customer = new Customer(firstName, lastName, email);
-        customers.put(customer.getEmail(), customer);
+        Customer customer = new Customer(firstName, lastName, email);
+        allCustomers.put(customer.getEmail(), customer);
     }
 
     public Customer getCustomer(String customerEmail) {
-        return customers.get(customerEmail);
+        Customer customer = allCustomers.get(customerEmail);
+
+        return customer;
     }
 
     public Collection<Customer> getAllCustomers() {
-        return (Collection<Customer>) customers;
+        return (Collection<Customer>) allCustomers;
     }
 }
