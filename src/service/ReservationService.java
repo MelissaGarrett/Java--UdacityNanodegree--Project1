@@ -29,6 +29,16 @@ public class ReservationService {
         return room;
     }
 
+    public Collection<IRoom> getAllRooms() {
+        List<IRoom> allRms = new ArrayList<IRoom>();
+
+        for (Map.Entry<String, IRoom> entry: allRooms.entrySet()) {
+            allRms.add(entry.getValue());
+        }
+
+        return allRms;
+    }
+
     public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
         List<IRoom> availRooms = new ArrayList<IRoom>();
 

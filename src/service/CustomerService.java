@@ -2,9 +2,7 @@ package service;
 
 import model.Customer;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerService {
     private static CustomerService customerService = new CustomerService(); // a Singleton
@@ -27,6 +25,12 @@ public class CustomerService {
     }
 
     public Collection<Customer> getAllCustomers() {
-        return (Collection<Customer>) allCustomers;
+        List<Customer> allCusts = new ArrayList<Customer>();
+
+        for (Map.Entry<String, Customer> entry : allCustomers.entrySet()) {
+            allCusts.add(entry.getValue());
+        }
+
+        return allCusts;
     }
 }
