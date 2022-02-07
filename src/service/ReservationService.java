@@ -33,7 +33,11 @@ public class ReservationService {
         List<IRoom> availRooms = new ArrayList<IRoom>();
 
         for (Map.Entry<String, Reservation> entry: allReservations.entrySet()) {
-            
+            if (checkInDate.after(entry.getValue().getCheckOutDate()) ||
+                    checkOutDate.before(entry.getValue().getCheckInDate()))
+            {
+                availRooms.add(getARoom(entry.getKey()));
+            }
         }
         return availRooms;
     }
