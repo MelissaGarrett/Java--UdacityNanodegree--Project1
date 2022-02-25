@@ -9,12 +9,18 @@ public class MainMenu {
     static int selection;
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
+            scanner = new Scanner(System.in);
+
             displayMainMenu();
+        } catch (Exception e) {
+
+        } finally {
+            scanner.close();
         }
     }
 
-    private static void displayMainMenu() {
+    static void displayMainMenu() {
         try {
             System.out.println("\nWelcome to the Hotel Reservation Application");
             System.out.println("--------------------------------------------\n");
@@ -31,20 +37,24 @@ public class MainMenu {
         } catch (Exception e) {
             System.out.println("Invalid input");
         } finally {
-            scanner.close();
+
         }
     }
 
     private static void processSelection() {
         switch (selection) {
             case 1:
-
+                findReserveRoom();
+                break;
             case 2:
-
+                seeMyReservations();
+                break;
             case 3:
-
+                createAccount();
+                break;
             case 4:
                 viewAdminMenu();
+                break;
             case 5:
                 exit(0);
             default:
