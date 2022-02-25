@@ -20,7 +20,7 @@ public class AdminMenu {
 
             processSelection();
         } catch (Exception e) {
-            System.out.println("Invalid input.");
+            System.out.println("ERROR: Invalid input");
         } finally {
 
         }

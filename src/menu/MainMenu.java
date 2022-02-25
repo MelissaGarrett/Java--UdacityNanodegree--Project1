@@ -35,7 +35,7 @@ public class MainMenu {
 
             processSelection();
         } catch (Exception e) {
-            System.out.println("Invalid input");
+            System.out.println("ERROR: Invalid input");
         } finally {
 
         }
@@ -72,6 +72,13 @@ public class MainMenu {
 
     private static void createAccount() {
 
+        try {
+
+        } catch (Exception e){
+
+        } finally {
+
+        }
     }
 
     private static void viewAdminMenu() {

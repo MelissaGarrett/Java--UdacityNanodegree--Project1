@@ -48,6 +48,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "First Name: " + getFirstName() + " Last Name: " + getLastName() + " Email: " + getEmail();
+        return "\nFirst Name: " + getFirstName() + " Last Name: " + getLastName() + " Email: " + getEmail();
     }
 }
