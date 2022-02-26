@@ -1,22 +1,11 @@
 package model;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Customer {
     private String firstName;
     private String lastName;
     private String email;
 
-    private final String emailRegex = "^(.+)@(.+).com$";
-    Pattern pattern = Pattern.compile(emailRegex);
-    Matcher matcher;
-
     public Customer(String firstName, String lastName, String email) {
-        if (!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid email address.");
-        }
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
