@@ -101,7 +101,6 @@ public class MainMenu {
     private static void checkEmailAddress() {
         while (!pattern.matcher(userEmail).matches()) {
             System.out.println("ERROR: Invalid email address");
-
             try {
                 System.out.println("\nEnter Email Address (name@domain.com):");
                 userEmail = scanner.nextLine();
