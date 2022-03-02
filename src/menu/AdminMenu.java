@@ -208,7 +208,41 @@ public class AdminMenu {
     }
 
     private static void addTestData() {
+        Room room1 = new Room();
+        Room room2 = new Room();
+        Room room3 = new Room();
+        Room room4 = new Room();
+        Room room5 = new Room();
 
+
+        room1.setRoomNumber("100");
+        room1.setRoomPrice(100.00);
+        room1.setRoomType(RoomType.SINGLE);
+        rooms.add(room1);
+
+        room2.setRoomNumber("200");
+        room2.setRoomPrice(125.00);
+        room2.setRoomType(RoomType.DOUBLE);
+        rooms.add(room2);
+
+        room3.setRoomNumber("300");
+        room3.setRoomPrice(100.00);
+        room3.setRoomType(RoomType.SINGLE);
+        rooms.add(room3);
+
+        room4.setRoomNumber("400");
+        room4.setRoomPrice(125.00);
+        room4.setRoomType(RoomType.DOUBLE);
+        rooms.add(room4);
+
+        room5.setRoomNumber("500");
+        room5.setRoomPrice(100.00);
+        room5.setRoomType(RoomType.SINGLE);
+        rooms.add(room5);
+
+        AdminResource.getInstance().addRoom(rooms);
+
+        displayAdminMenu();
     }
 
     private static void backToMainMenu() {
