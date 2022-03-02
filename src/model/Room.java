@@ -11,6 +11,8 @@ public class Room implements IRoom {
         this.enumeration = enumeration;
     }
 
+    public Room() {}
+
     @Override
     public String getRoomNumber() {
         return roomNumber;
@@ -45,6 +47,7 @@ public class Room implements IRoom {
 
     @Override
     public String toString() {
-        return "\nRoom Number: " + getRoomNumber() + " " + getRoomType() + " bed" + " Room Price: $" + getRoomPrice();
+        String formattedPrice = String.format("$%.2f", getRoomPrice());
+        return "\nRoom Number: " + getRoomNumber() + " " + getRoomType() + " bed" + " Room Price: " + formattedPrice;
     }
 }

@@ -2,6 +2,8 @@ package menu;
 
 import api.AdminResource;
 import model.Customer;
+import model.IRoom;
+import model.Room;
 import model.RoomType;
 
 import java.util.*;
@@ -9,9 +11,11 @@ import java.util.*;
 public class AdminMenu {
     static Scanner scanner;
     static int adminMenuSelection;
-    static int roomNumber;
+    static String roomNumber;
     static double roomPrice;
     static RoomType convertedRoomType;
+
+    static List<IRoom> rooms = new ArrayList<IRoom>();
 
     static void displayAdminMenu() {
         try {
@@ -68,15 +72,22 @@ public class AdminMenu {
         allCustomers = AdminResource.getInstance().getAllCustomers();
 
         for (Customer customer : allCustomers) {
-            System.out.println("\nFirst Name: " + customer.getFirstName() + " Last Name: " + customer.getLastName() +
-                    " Email: " + customer.getEmail());
+            System.out.println(customer.toString());
         }
 
         displayAdminMenu();
     }
 
     private static void seeAllRooms() {
+        Collection<IRoom> allRooms = new ArrayList<IRoom>();
 
+        allRooms = AdminResource.getInstance().getAllRooms();
+
+        for (IRoom room : allRooms) {
+            System.out.println(room.toString());
+        }
+
+        displayAdminMenu();
     }
 
     private static void seeAllReservations() {
@@ -84,26 +95,21 @@ public class AdminMenu {
     }
 
     private static void addARoom() {
-        boolean validRoomNumber = false, validPrice = false, validRoomType = false;
+        boolean validPrice = false, validRoomType = false;
         int roomType;
         boolean addMoreRooms = true;
         String moreRooms = null;
 
-        while (validRoomNumber == false) {
-            try {
-                System.out.println("\nEnter Room Number:");
-                roomNumber = scanner.nextInt();
+        Room room = new Room();
 
-                validRoomNumber = true;
-            } catch (Exception e) {
-                System.out.println("ERROR: Invalid input");
-                scanner.nextLine();
+        try {
+            System.out.println("\nEnter Room Number:");
+            roomNumber = scanner.nextLine();
+        } catch (Exception e) {
 
-            } finally {
+        } finally {
 
-            }
         }
-        scanner.nextLine(); // to clear buffer
 
         while (validPrice == false) {
             try {
@@ -143,7 +149,10 @@ public class AdminMenu {
         }
         scanner.nextLine();
 
-        // TODO: Save off in a Room object
+        room.setRoomNumber(roomNumber);
+        room.setRoomPrice(roomPrice);
+        room.setRoomType(convertedRoomType);
+        rooms.add(room);
 
         while (addMoreRooms) {
             try {
@@ -165,7 +174,7 @@ public class AdminMenu {
             }
         }
 
-        //AdminResource.getInstance().addRoom();
+        AdminResource.getInstance().addRoom(rooms);
 
         displayAdminMenu();
     }
