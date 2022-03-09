@@ -1,10 +1,12 @@
 package menu;
 
 import api.AdminResource;
+import api.HotelResource;
 import model.Customer;
 import model.IRoom;
 import model.Room;
 import model.RoomType;
+import service.ReservationService;
 
 import java.util.*;
 
@@ -14,6 +16,9 @@ public class AdminMenu {
     static String roomNumber;
     static double roomPrice;
     static RoomType convertedRoomType;
+
+    static int roomType;
+    static String moreRooms = null;
 
     static List<IRoom> rooms = new ArrayList<IRoom>();
 
@@ -71,8 +76,12 @@ public class AdminMenu {
 
         allCustomers = AdminResource.getInstance().getAllCustomers();
 
-        for (Customer customer : allCustomers) {
-            System.out.println(customer.toString());
+        if (allCustomers.isEmpty()) {
+            System.out.println("There are no customers to display.");
+        } else {
+            for (Customer customer : allCustomers) {
+                System.out.println(customer.toString());
+            }
         }
 
         displayAdminMenu();
@@ -83,22 +92,26 @@ public class AdminMenu {
 
         allRooms = AdminResource.getInstance().getAllRooms();
 
-        for (IRoom room : allRooms) {
-            System.out.println(room.toString());
+        if (allRooms.isEmpty()) {
+            System.out.println("There are no rooms to display.");
+        } else {
+            for (IRoom room : allRooms) {
+                System.out.println(room.toString());
+            }
         }
 
         displayAdminMenu();
     }
 
     private static void seeAllReservations() {
+        ReservationService.getInstance().printAllReservation();
 
+        displayAdminMenu();
     }
 
     private static void addARoom() {
         boolean validPrice = false, validRoomType = false;
-        int roomType;
         boolean addMoreRooms = true;
-        String moreRooms = null;
 
         Room room = new Room();
 
@@ -131,7 +144,7 @@ public class AdminMenu {
                 System.out.println("Enter Room Type: (1) for Single bed, (2) for Double bed:");
                 roomType = scanner.nextInt();
 
-                checkRoomType(roomType);
+                checkRoomType();
 
                 if (roomType == 1) {
                     convertedRoomType = RoomType.SINGLE;
@@ -156,10 +169,10 @@ public class AdminMenu {
 
         while (addMoreRooms) {
             try {
-                System.out.println("\nWould you like to add another room (Y/N)?");
+                System.out.println("\nWould you like to add another room (y/n)?");
                 moreRooms = scanner.nextLine().toUpperCase();
 
-                checkMoreRooms(moreRooms);
+                checkMoreRooms();
 
                 if (moreRooms.equals("Y")) {
                     addARoom();
@@ -168,7 +181,6 @@ public class AdminMenu {
                 }
             } catch (Exception e) {
                 System.out.println("ERROR: Invalid input");
-                scanner.nextLine();
             } finally {
 
             }
@@ -179,28 +191,28 @@ public class AdminMenu {
         displayAdminMenu();
     }
 
-    private static void checkRoomType(int roomType) {
+    private static void checkRoomType() {
         while (roomType < 1 || roomType > 2) {
             System.out.println("ERROR: Invalid Room Type");
             try {
                 System.out.println("Enter Room Type: (1) for Single bed, (2) for Double bed:");
                 roomType = scanner.nextInt();
             } catch (Exception e) {
-                scanner.nextLine();
+
             } finally {
 
             }
         }
     }
 
-    private static void checkMoreRooms(String moreRooms) {
+    private static void checkMoreRooms() {
         while (!(moreRooms.equals("Y") || moreRooms.equals("N"))) {
             System.out.println("ERROR: Invalid response");
             try {
-                System.out.println("Would you like to add another room (Y/N)?");
+                System.out.println("Would you like to add another room (y/n)?");
                 moreRooms = scanner.nextLine().toUpperCase();
             } catch (Exception e) {
-                scanner.nextLine();
+
             } finally {
 
             }
@@ -208,39 +220,23 @@ public class AdminMenu {
     }
 
     private static void addTestData() {
-        Room room1 = new Room();
-        Room room2 = new Room();
-        Room room3 = new Room();
-        Room room4 = new Room();
-        Room room5 = new Room();
+        Room room1 = new Room("100", 100.0, RoomType.SINGLE);
+        Room room2 = new Room("200", 125.0, RoomType.DOUBLE);
+        Room room3 = new Room("300", 100.0, RoomType.SINGLE);
+        Room room4 = new Room("400", 125.0, RoomType.DOUBLE);
+        Room room5 = new Room("500", 100.0, RoomType.SINGLE);
 
-
-        room1.setRoomNumber("100");
-        room1.setRoomPrice(100.00);
-        room1.setRoomType(RoomType.SINGLE);
         rooms.add(room1);
-
-        room2.setRoomNumber("200");
-        room2.setRoomPrice(125.00);
-        room2.setRoomType(RoomType.DOUBLE);
         rooms.add(room2);
-
-        room3.setRoomNumber("300");
-        room3.setRoomPrice(100.00);
-        room3.setRoomType(RoomType.SINGLE);
         rooms.add(room3);
-
-        room4.setRoomNumber("400");
-        room4.setRoomPrice(125.00);
-        room4.setRoomType(RoomType.DOUBLE);
         rooms.add(room4);
-
-        room5.setRoomNumber("500");
-        room5.setRoomPrice(100.00);
-        room5.setRoomType(RoomType.SINGLE);
         rooms.add(room5);
 
         AdminResource.getInstance().addRoom(rooms);
+
+        HotelResource.getInstance().createACustomer("max@gmail.com", "Max", "Mall");
+        HotelResource.getInstance().createACustomer("jordan@gmail.com", "Jordan", "Jam");
+        HotelResource.getInstance().createACustomer("alex@gmail.com", "Alex", "Apple");
 
         displayAdminMenu();
     }

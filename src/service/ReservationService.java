@@ -30,7 +30,7 @@ public class ReservationService {
     }
 
     public Collection<IRoom> getAllRooms() {
-        List<IRoom> allRms = new ArrayList<IRoom>();
+        Collection<IRoom> allRms = new ArrayList<IRoom>();
 
         for (Map.Entry<String, IRoom> entry: allRooms.entrySet()) {
             allRms.add(entry.getValue());
@@ -40,7 +40,7 @@ public class ReservationService {
     }
 
     public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
-        List<IRoom> availRooms = new ArrayList<IRoom>();
+        Collection<IRoom> availRooms = new ArrayList<IRoom>();
 
         for (Map.Entry<String, Reservation> entry: allReservations.entrySet()) {
             if (checkInDate.after(entry.getValue().getCheckOutDate()) ||
@@ -60,7 +60,7 @@ public class ReservationService {
     }
 
     public Collection<Reservation> getCustomersReservation(Customer customer) {
-        List<Reservation> custReservations = new ArrayList<Reservation>();
+        Collection<Reservation> custReservations = new ArrayList<Reservation>();
 
         for (Map.Entry<String, Reservation> entry : allReservations.entrySet()) {
             if (entry.getKey().equals(customer.getEmail())) {
@@ -71,8 +71,12 @@ public class ReservationService {
     }
 
     public void printAllReservation() {
-        for (Map.Entry<String, Reservation> entry: allReservations.entrySet()) {
-            System.out.println(entry.getValue());
+        if (allReservations.isEmpty()) {
+            System.out.println("There are no reservations to display.");
+        } else {
+            for (Map.Entry<String, Reservation> entry : allReservations.entrySet()) {
+                System.out.println(entry.getValue());
+            }
         }
     }
 }

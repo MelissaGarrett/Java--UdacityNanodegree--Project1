@@ -25,7 +25,7 @@ public class CustomerService {
     }
 
     public Collection<Customer> getAllCustomers() {
-        List<Customer> allCusts = new ArrayList<Customer>();
+        Collection<Customer> allCusts = new ArrayList<Customer>();
 
         for (Map.Entry<String, Customer> entry : allCustomers.entrySet()) {
             allCusts.add(entry.getValue());

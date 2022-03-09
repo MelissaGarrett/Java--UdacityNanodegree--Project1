@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation {
@@ -33,11 +34,17 @@ public class Reservation {
 
     @Override
     public String toString() {
+        String formattedPrice = String.format("$%.2f", room.getRoomPrice());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("E, MMM dd yyyy");
+        String stringInDate = formatter.format(checkInDate);
+        String stringOutDate = formatter.format(checkOutDate);
+
         return "\nReservation\n" +
                 customer.getFirstName() + " " + customer.getLastName() + "\n" +
                 "Room " + room.getRoomNumber() + " " + room.getRoomType() + " bed\n" +
-                "Price $" + room.getRoomPrice() + " per night\n" +
-                "Check in Date " + checkInDate + "\n" +
-                "Check out Date " + checkOutDate;
+                "Price " + formattedPrice + " per night\n" +
+                "Check in Date " + stringInDate + "\n" +
+                "Check out Date " + stringOutDate;
     }
 }

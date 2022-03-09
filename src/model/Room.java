@@ -48,6 +48,7 @@ public class Room implements IRoom {
     @Override
     public String toString() {
         String formattedPrice = String.format("$%.2f", getRoomPrice());
+
         return "\nRoom Number: " + getRoomNumber() + " " + getRoomType() + " bed" + " Room Price: " + formattedPrice;
     }
 }
