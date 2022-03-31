@@ -120,7 +120,7 @@ public class MainMenu {
             }
         }
 
-        allRooms = AdminResource.getInstance().getAllRooms();
+        allRooms = HotelResource.getInstance().findARoom(checkInDate, checkOutDate);
 
         for (IRoom room : allRooms) {
             System.out.println(room.toString());

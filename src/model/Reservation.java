@@ -17,6 +17,22 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
     }
 
+    public IRoom getRoom() {
+        return room;
+    }
+
+    public void setRoom(IRoom room) {
+        this.room = room;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public Date getCheckInDate() {
         return checkInDate;
     }
