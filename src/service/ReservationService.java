@@ -13,7 +13,7 @@ public class ReservationService {
 
     public static ReservationService getInstance() { return reservationService; }
 
-    Map<String, Reservation> allReservations = new HashMap<String, Reservation>();
+    List<Reservation> allReservations = new ArrayList<Reservation>();
     Map<String, IRoom> allRooms = new HashMap<String, IRoom>();
 
     Collection<IRoom> reservedRooms = new ArrayList<IRoom>();
@@ -51,6 +51,13 @@ public class ReservationService {
             }
         }
 
+        for (Reservation res: allReservations) {
+            if (checkInDate.after(res.getCheckOutDate()) ||
+                    checkOutDate.before(res.getCheckInDate())) {
+                availRooms.add(getARoom(res.getRoom().getRoomNumber()));
+            }
+        }
+        
         return availRooms;
 
 //            for (Map.Entry<String, IRoom> roomsEntry: allRooms.entrySet()) {
@@ -71,14 +78,14 @@ public class ReservationService {
     }
 
     void getReservedRooms() {
-        for (Map.Entry<String, Reservation> reservationsEntry: allReservations.entrySet()) {
-            reservedRooms.add(reservationsEntry.getValue().getRoom());
+        for (Reservation res: allReservations) {
+            reservedRooms.add(res.getRoom());
         }
     }
 
     public Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
-        allReservations.put(customer.getEmail(), reservation);
+        allReservations.add(reservation);
 
         return reservation;
     }
@@ -86,11 +93,12 @@ public class ReservationService {
     public Collection<Reservation> getCustomersReservation(Customer customer) {
         Collection<Reservation> custReservations = new ArrayList<Reservation>();
 
-        for (Map.Entry<String, Reservation> entry : allReservations.entrySet()) {
-            if (entry.getKey().equals(customer.getEmail())) {
-                custReservations.add(entry.getValue());
+        for (Reservation res: allReservations) {
+            if (res.getCustomer().getEmail().equals(customer.getEmail())) {
+                custReservations.add(res);
             }
         }
+
         return custReservations;
     }
 
@@ -98,8 +106,8 @@ public class ReservationService {
         if (allReservations.isEmpty()) {
             System.out.println("There are no reservations to display.");
         } else {
-            for (Map.Entry<String, Reservation> entry : allReservations.entrySet()) {
-                System.out.println(entry.getValue());
+            for (Reservation res: allReservations) {
+                System.out.println(res);
             }
         }
     }
