@@ -166,7 +166,7 @@ public class MainMenu {
 
                 checkBookingInput();
 
-                if (bookARoomInput.equals("Y")) {
+                if (bookARoomInput.equalsIgnoreCase("Y")) {
                     while (haveAccount) {
                         try {
                             System.out.println("Do you have an account with us (y/n)?");
@@ -174,7 +174,7 @@ public class MainMenu {
 
                             checkAccountInput();
 
-                            if (haveAnAccountInput.equals("Y")) {
+                            if (haveAnAccountInput.equalsIgnoreCase("Y")) {
                                 try {
                                     System.out.println("Enter Email Address (name@domain.com):");
                                     userEmail = scanner.nextLine();
@@ -279,7 +279,7 @@ public class MainMenu {
     }
 
     private static void checkBookingInput() {
-        while (!(bookARoomInput.equals("Y") || bookARoomInput.equals("N"))) {
+        while (!(bookARoomInput.equalsIgnoreCase("Y") || bookARoomInput.equalsIgnoreCase("N"))) {
             System.out.println("ERROR: Invalid response");
             try {
                 System.out.println("Would you like to book a room (y/n)?");
@@ -293,7 +293,7 @@ public class MainMenu {
     }
 
     private static void checkAccountInput() {
-        while (!(haveAnAccountInput.equals("Y") || haveAnAccountInput.equals("N"))) {
+        while (!(haveAnAccountInput.equalsIgnoreCase("Y") || haveAnAccountInput.equalsIgnoreCase("N"))) {
             System.out.println("ERROR: Invalid response");
             try {
                 System.out.println("Do you have an account with us (y/n)?");
