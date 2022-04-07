@@ -122,8 +122,41 @@ public class MainMenu {
 
         allRooms = HotelResource.getInstance().findARoom(checkInDate, checkOutDate);
 
-        for (IRoom room : allRooms) {
-            System.out.println(room.toString());
+        if (allRooms.isEmpty()) {
+            Calendar calendarIn = Calendar.getInstance();
+            calendarIn.setTime(checkInDate);
+
+            Calendar calendarOut = Calendar.getInstance();
+            calendarOut.setTime(checkOutDate);
+
+            calendarIn.add(Calendar.DATE, 7);
+            calendarOut.add(Calendar.DATE, 7);
+
+            checkInDate = calendarIn.getTime();
+            checkOutDate = calendarOut.getTime();
+
+            allRooms = HotelResource.getInstance().findARoom(checkInDate, checkOutDate);
+
+            if (allRooms.isEmpty()) {
+                System.out.println("\nWe have no rooms available for that time frame.");
+                bookRoom = false;
+            } else {
+                formatter = new SimpleDateFormat("E, MMM dd yyyy");
+                String stringInDate = formatter.format(checkInDate);
+                String stringOutDate = formatter.format(checkOutDate);
+
+                System.out.println("\nWe have no rooms available for that time frame.\n" +
+                        "But, we have the following rooms for " + stringInDate + " - " + stringOutDate);
+
+                for (IRoom room : allRooms) {
+                    System.out.println(room.toString());
+                }
+            }
+
+        } else {
+            for (IRoom room : allRooms) {
+                System.out.println(room.toString());
+            }
         }
 
         while (bookRoom) {

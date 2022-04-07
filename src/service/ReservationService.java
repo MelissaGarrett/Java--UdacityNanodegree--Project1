@@ -51,34 +51,18 @@ public class ReservationService {
             }
         }
 
-        for (Reservation res: allReservations) {
+        for (Reservation res : allReservations) {
             if (checkInDate.after(res.getCheckOutDate()) ||
                     checkOutDate.before(res.getCheckInDate())) {
                 availRooms.add(getARoom(res.getRoom().getRoomNumber()));
             }
         }
-        
-        return availRooms;
 
-//            for (Map.Entry<String, IRoom> roomsEntry: allRooms.entrySet()) {
-//            if (allReservations.entrySet().contains(getARoom(roomsEntry.getKey()))) {
-//                System.out.println("IF");
-//                for (Map.Entry<String, Reservation> reservationEntry : allReservations.entrySet()) {
-//                    if (checkInDate.after(reservationEntry.getValue().getCheckOutDate()) ||
-//                        checkOutDate.before(reservationEntry.getValue().getCheckInDate())) {
-//                            availRooms.add(getARoom(roomsEntry.getKey()));
-//                    }
-//                }
-//            } else {
-//                System.out.println("ELSE");
-//                availRooms.add(getARoom(roomsEntry.getKey()));
-//            }
-//        }
-//        return availRooms;
+        return availRooms;
     }
 
     void getReservedRooms() {
-        for (Reservation res: allReservations) {
+        for (Reservation res : allReservations) {
             reservedRooms.add(res.getRoom());
         }
     }
@@ -93,7 +77,7 @@ public class ReservationService {
     public Collection<Reservation> getCustomersReservation(Customer customer) {
         Collection<Reservation> custReservations = new ArrayList<Reservation>();
 
-        for (Reservation res: allReservations) {
+        for (Reservation res : allReservations) {
             if (res.getCustomer().getEmail().equals(customer.getEmail())) {
                 custReservations.add(res);
             }
@@ -106,7 +90,7 @@ public class ReservationService {
         if (allReservations.isEmpty()) {
             System.out.println("There are no reservations to display.");
         } else {
-            for (Reservation res: allReservations) {
+            for (Reservation res : allReservations) {
                 System.out.println(res);
             }
         }
