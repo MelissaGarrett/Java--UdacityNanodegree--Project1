@@ -68,6 +68,14 @@ public class ReservationService {
     }
 
     public Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+        for (Reservation res: allReservations) {
+            if (res.getRoom().getRoomNumber().equals(room.getRoomNumber()) &&
+                res.getCheckInDate().equals(checkInDate) &&
+                res.getCheckOutDate().equals(checkOutDate)) {
+                    return null;
+            }
+        }
+
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
         allReservations.add(reservation);
 
